@@ -1,5 +1,5 @@
 // pages/index.tsx
-import React from "react";
+import React, { useState } from "react";
 import { GetStaticProps } from "next";
 
 import { getMarvelCharacters } from "@/services/api";
@@ -7,7 +7,6 @@ import { getMarvelCharacters } from "@/services/api";
 import Layout from "@/template/Layout";
 import Header from "@/template/Header";
 import TitleHome from "@/components/TitleHome";
-import HeaderCtnHeroes from "@/components/HeaderCtnHeroes";
 import Footer from "@/template/Footer";
 import Input from "@/components/Input";
 import ContainerHeroes from "@/components/ContainerHeroes";
@@ -27,20 +26,33 @@ interface CharactersPageProps {
 }
 
 const CharactersPage: React.FC<CharactersPageProps> = ({ characters }) => {
-  return (
-    <>
-      <Layout title="Home - Marvel Search Heroes" description="">
-        <Header />
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
-        <TitleHome
-          title="EXPLORE O UNIVERSO"
-          text="Mergulhe no domínio deslumbrante de todos os personagens clássicos que você ama - e aqueles que você descobrirá em breve!"
-        />
-        <Input placeholder="Procure por heróis" />
-        <ContainerHeroes characters={characters} />
-        <Footer />
-      </Layout>
-    </>
+  // Função para lidar com mudanças no input de busca
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+  };
+
+  // Filtrando os personagens com base no nome
+  const filteredCharacters = characters.filter((character) =>
+    character.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  return (
+    <Layout title="Home - Marvel Search Heroes" description="">
+      <Header />
+      <TitleHome
+        title="EXPLORE O UNIVERSO"
+        text="Mergulhe no domínio deslumbrante de todos os personagens clássicos que você ama - e aqueles que você descobrirá em breve!"
+      />
+      <Input
+        placeholder="Procure por heróis"
+        value={searchQuery}
+        onChange={handleSearchChange}
+      />
+      <ContainerHeroes characters={filteredCharacters} />
+      <Footer />
+    </Layout>
   );
 };
 
@@ -50,25 +62,8 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       characters,
     },
-    revalidate: 86400, // Revalidar a cada 24 horas
+    revalidate: 86400,
   };
 };
 
 export default CharactersPage;
-
-// return (
-//     <>
-//         <Layout title="Home - Marvel Search Heroes" description="">
-//             <Header />
-
-//             <TitleHome
-//                 title="EXPLORE O UNIVERSO"
-//                 text="Mergulhe no domínio deslumbrante de todos os personagens clássicos que você ama - e aqueles que você descobrirá em breve!"
-//             />
-//             <Input placeholder="Procure por heróis" />
-
-//             <Footer />
-//         </Layout>
-//     </>
-
-// )

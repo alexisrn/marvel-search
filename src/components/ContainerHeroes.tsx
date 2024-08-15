@@ -19,7 +19,7 @@ interface CharacterGridProps {
 
 const Heroes: React.FC<CharacterGridProps> = ({ characters }) => {
   return (
-    <div className="flex flex-wrap justify-between gap-4 w-full h-full w-[90%]">
+    <div className="flex flex-wrap justify-between gap-4 w-full h-full w-[80%]">
         <HeaderCtnHeroes />
       {characters.map((character) => (
         <>
@@ -34,9 +34,4 @@ export default Heroes;
 
 
 
-  {/* <div className='w-[85%] h-full mb-[100px]'>
-                <HeaderCtnHeroes />
-                <div className='flex flex-wrap justify-between gap-4 w-full h-full'>
-               <Card data={props.data} />
-                </div>
-            </div> */}
+ 

@@ -5,6 +5,8 @@ import lupa from '../../public/assets/busca/Lupa/Shape.png'
 
 interface InputProps{
     placeholder: string,
+    value?: any,
+    onChange?: any,
 }
 
 export default function Input(props:InputProps) {
@@ -16,7 +18,9 @@ export default function Input(props:InputProps) {
         backgroundPosition: 'center',
       }}>
         <Image src={lupa} alt="Lupa" className='cursor-pointer mx-6'/>
-        <input type="text" className='bg-transparent outline-none placeholder-[#ff1410d3] text-[#ff1410d3]' placeholder={props.placeholder} />
+        <input type="text" className='bg-transparent outline-none placeholder-[#ff1410d3] text-[#ff1410d3]' placeholder={props.placeholder}
+        value={props.value}
+        onChange={props.onChange} />
     </div>
     </>
   )
