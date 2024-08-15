@@ -16,7 +16,7 @@ export default function Input(props:InputProps) {
         backgroundPosition: 'center',
       }}>
         <Image src={lupa} alt="Lupa" className='cursor-pointer mx-6'/>
-        <input type="text" className='bg-transparent outline-none placeholder-[#ff141085] text-[#ff141085]' placeholder={props.placeholder} />
+        <input type="text" className='bg-transparent outline-none placeholder-[#ff1410d3] text-[#ff1410d3]' placeholder={props.placeholder} />
     </div>
     </>
   )
